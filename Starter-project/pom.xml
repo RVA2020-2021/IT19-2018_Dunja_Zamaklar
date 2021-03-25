@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>rva</groupId>
-	<artifactId>starter-project</artifactId>
+	<artifactId>IT19-2018-Dunja-Zamaklar</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>starter-project</name>
-	<description>Starter Project for RVA 2020/2021 Course</description>
+	<name>IT19-2018-Dunja-Zamaklar</name>
+	<description>Backend Project for RVA 2020/2021 Course</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
