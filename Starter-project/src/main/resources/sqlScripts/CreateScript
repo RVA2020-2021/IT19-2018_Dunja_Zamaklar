@@ -1,0 +1,64 @@
+drop table if exists status cascade;
+drop table if exists student cascade;
+drop table if exists fakultet cascade;
+drop table if exists departman cascade;
+
+drop sequence if exists student_seq;
+drop sequence if exists status_seq;
+drop sequence if exists fakultet_seq;
+drop sequence if exists departman_seq;
+
+create table status
+(
+	id integer not null,
+	naziv varchar(100),
+	oznaka varchar(10)
+);
+
+create table student
+(
+	id int not null,
+	ime varchar(50),
+	prezime varchar(50),
+	broj_indeksa varchar(20),
+	status int not null,
+	departman int not null
+);
+
+create table fakultet
+(
+	id int not null,
+	naziv varchar(100),
+	sediste varchar(50)
+);
+
+create table departman
+(
+	id int not null,
+	naziv varchar(100),
+	oznaka varchar(10),
+	fakultet int not null
+);
+
+alter table status add constraint pk_status primary key (id);
+alter table student add constraint pk_student primary key (id);
+alter table fakultet add constraint pk_fakultet primary key (id);
+alter table departman add constraint pk_departman primary key (id);
+
+alter table student add constraint fk_student_status foreign key (status) references status (id);
+alter table student add constraint fk_student_departman foreign key (departman) references departman (id);
+alter table departman add constraint fk_departman_fakultet foreign key (fakultet) references fakultet (id);
+
+create index idxpk_status on status (id);
+create index idxpk_student on student (id);
+create index idxpk_fakultet on fakultet (id);
+create index idxpk_departman on departman (id);
+
+create index idxfk_student_status on student (status);
+create index idxfk_student_departman on student (departman);
+create index idxfk_departman_fakultet on departman (fakultet);
+
+create sequence student_seq increment 1;
+create sequence fakultet_seq increment 1;
+create sequence departman_seq increment 1;
+create sequence status_seq increment 1;

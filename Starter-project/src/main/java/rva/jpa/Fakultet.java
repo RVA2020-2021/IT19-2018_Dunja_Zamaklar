@@ -20,7 +20,7 @@ public class Fakultet implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="FAKULTET_ID_GENERATOR", sequenceName="FAKULTET_SEQ")
+	@SequenceGenerator(name="FAKULTET_ID_GENERATOR", sequenceName="FAKULTET_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FAKULTET_ID_GENERATOR")
 	private Integer id;
 
