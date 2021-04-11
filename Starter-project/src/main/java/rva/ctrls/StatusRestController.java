@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import rva.jpa.Departman;
 import rva.jpa.Fakultet;
 import rva.jpa.Status;
 import rva.repository.StatusRepository;
 
+@CrossOrigin
 @RestController
+@Api(tags= {"Status CRUD operacije"})
 public class StatusRestController {
 
 	@Autowired
@@ -30,25 +35,28 @@ public class StatusRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@ApiOperation(value="Vraca kolekciju svih statusa iz baze podataka")
 	@GetMapping("Status")
 	public Collection<Status> getStatusi()
 	{
 		return statusRepository.findAll();
 	}
 	
+	@ApiOperation(value="Vraca status na osnovu prosledjene path varijable")
 	@GetMapping("Status/{id}")
 	public Status getStatus(@PathVariable("id")Integer id)
 	{
 		return statusRepository.getOne(id);
 	}
 	
-	
+	@ApiOperation(value="Vraca kolekciju statusa na osnovu prosledjenog naziva")
 	 	 @GetMapping("StatusNaziv/{naziv}")
 	public Collection<Status> getStatusByNaziv(@PathVariable("naziv")String naziv)
 	{
 		return statusRepository.findByNazivContainingIgnoreCase(naziv);
 	}
-	 	 
+	
+	@ApiOperation(value="Dodaje novi status u bazu podataka")	 
 		@PostMapping("Status")
 	public ResponseEntity<Status> insertStatus(@RequestBody Status status)
 	{
@@ -60,6 +68,7 @@ public class StatusRestController {
 		return new ResponseEntity<Status>(HttpStatus.CONFLICT);
 	}
 		
+	@ApiOperation(value="Update-uje status iz baze podataka")
 	@PutMapping("Status")
 	public ResponseEntity<Status> UpdateStatus(@RequestBody Status status)
 	{
@@ -71,7 +80,8 @@ public class StatusRestController {
 		return new ResponseEntity<Status>(HttpStatus.CONFLICT);
 	}
 	
-	@Transactional
+	@ApiOperation(value="Brise status iz baze podataka")
+	//@Transactional
 	@DeleteMapping("Status/{id}")
 	public ResponseEntity<Status> deleteStatus(@PathVariable("id")Integer id)
 	{

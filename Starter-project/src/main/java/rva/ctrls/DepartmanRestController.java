@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import rva.jpa.Departman;
 import rva.jpa.Fakultet;
 import rva.repository.DepartmanRepository;
 import rva.repository.StudentRepository;
 
+@CrossOrigin
 @RestController
+@Api(tags= {"Departman CRUD operacije"})
 public class DepartmanRestController {
 	
 	/*injektovanje zavisnosti ->
@@ -39,18 +44,21 @@ public class DepartmanRestController {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@ApiOperation(value="Vraca kolekciju svih departmana iz baze podataka")
 	@GetMapping("Departman")
 	public Collection<Departman> getDepartmani()
 	{
 		return departmanRepository.findAll();
 	}
 	
+	@ApiOperation(value="Vraca departman na osnovu prosledjene path varijable za id")
 	@GetMapping("Departman/{id}")
 	public Departman getDepartman(@PathVariable("id")Integer id)
 	{
 		return departmanRepository.getOne(id);
 	}
 	
+	@ApiOperation(value="Vraca kolekciju departmana na osnovu prosledjenog naziva")
 	@GetMapping("DepartmanNaziv/{naziv}")
 	public Collection<Departman> getDepartmanByNaziv(@PathVariable("naziv")String naziv)
 	{
@@ -58,6 +66,7 @@ public class DepartmanRestController {
 	}
 	
 	//vracamo status kod 
+	@ApiOperation(value="Dodaje novi departman u bazu podataka")
 	@PostMapping("Departman")
 	public ResponseEntity<Departman> insertDepartman(@RequestBody Departman departman)
 	{
@@ -69,6 +78,7 @@ public class DepartmanRestController {
 		return new ResponseEntity<Departman>(HttpStatus.CONFLICT);
 	}
 	
+	@ApiOperation(value="Update-uje departman u bazi podataka")
 	@PutMapping("Departman")
 	public ResponseEntity<Departman> updateDepartman(@RequestBody Departman departman)
 	{
@@ -80,7 +90,8 @@ public class DepartmanRestController {
 		return new ResponseEntity<Departman>(HttpStatus.CONFLICT);
 	}
 	
-	 @Transactional
+	@ApiOperation(value="Brise departman iz baze podataka")
+	 //@Transactional
 	 @DeleteMapping("Departman/{id}")
 		public ResponseEntity<Departman> deleteDepartman(@PathVariable("id")Integer id)
 		{
