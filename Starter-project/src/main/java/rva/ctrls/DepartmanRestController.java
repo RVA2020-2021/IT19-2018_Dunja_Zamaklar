@@ -90,6 +90,7 @@ public class DepartmanRestController {
 		return new ResponseEntity<Departman>(HttpStatus.CONFLICT);
 	}
 	
+	//delete
 	@ApiOperation(value="Brise departman iz baze podataka")
 	 //@Transactional
 	 @DeleteMapping("Departman/{id}")
