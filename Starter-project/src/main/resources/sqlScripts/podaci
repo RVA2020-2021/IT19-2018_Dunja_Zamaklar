@@ -1,0 +1,55 @@
+-- status podaci
+insert into "status" ("id","naziv","oznaka") 
+values (nextval('status_seq'),'budzet','bdzt');
+insert into "status" ("id","naziv","oznaka") 
+values (nextval('status_seq'),'samofinansiranje','smf');
+insert into "status" ("id","naziv","oznaka") 
+values (nextval('status_seq'),'aktivan','akt');
+insert into "status" ("id","naziv","oznaka") 
+values (nextval('status_seq'),'zamrznut','zmnt');
+
+-- fakultet podaci
+insert into "fakultet" ("id","naziv","sediste") 
+values (nextval('fakultet_seq'),'Fakutet tehnickih nauka','UNS');
+insert into "fakultet" ("id","naziv","sediste") 
+values (nextval('fakultet_seq'),'Prirodno-matematicki fakultet','UNS');
+insert into "fakultet" ("id","naziv","sediste") 
+values (nextval('fakultet_seq'),'Medicinski fakultet','UNS');
+insert into "fakultet" ("id","naziv","sediste") 
+values (nextval('fakultet_seq'),'Pravni fakultet','UNS');
+
+--departman podaci
+insert into "departman" ("id","naziv","oznaka","fakultet")
+values (nextval('departman_seq'),'Menadzment','MFTN',1);
+insert into "departman" ("id","naziv","oznaka","fakultet")
+values (nextval('departman_seq'),'Stomatologija','SMF',3);
+insert into "departman" ("id","naziv","oznaka","fakultet")
+values (nextval('departman_seq'),'Biologija','BPMF',2);
+insert into "departman" ("id","naziv","oznaka","fakultet")
+values (nextval('departman_seq'),'Medjunarodni','MPF',4);
+
+--student podaci
+insert into "student" ("id","ime","prezime","broj_indeksa","status","departman")
+values (nextval('student_seq'),'Milica','Milic','ge-23-23',1,1);
+insert into "student" ("id","ime","prezime","broj_indeksa","status","departman")
+values (nextval('student_seq'),'Petar','Petrovic','dhw-1-2018',2,2);
+insert into "student" ("id","ime","prezime","broj_indeksa","status","departman")
+values (nextval('student_seq'),'Sanja','Markovic','mf-3-2010',3,3);
+insert into "student" ("id","ime","prezime","broj_indeksa","status","departman")
+values (nextval('student_seq'),'Nikola','Nikolic','222-fr-2',4,4);
+
+--TestPodaci
+insert into "status" ("id","naziv","oznaka") 
+values (-100,'TestStatus','test');
+insert into "fakultet" ("id","naziv","sediste") 
+values (-100,'TestFakultet','test');
+insert into "departman" ("id","naziv","oznaka","fakultet")
+values (-100,'Test','test',1);
+insert into "student" ("id","ime","prezime","broj_indeksa","status","departman")
+values (-100,'Test','Test','ge-Test',1,1);
+
+
+select broj_indeksa, st.naziv, d.naziv, f.naziv from student s left join
+status st on (s.status=st.id) left join departman d on (d.id=s.departman) left join fakultet f on
+(f.id=d.fakultet)
+
