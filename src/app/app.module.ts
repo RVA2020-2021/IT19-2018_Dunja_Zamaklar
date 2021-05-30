@@ -19,7 +19,12 @@ import { StudentComponent } from './components/student/student.component';
 import { DepartmanComponent } from './components/departman/departman.component';
 import { MatTableModule} from '@angular/material/table'
 import {HttpClientModule} from '@angular/common/http'
-import{MatToolbarModule} from '@angular/material/toolbar'
+import{MatToolbarModule} from '@angular/material/toolbar';
+import { StatusDialogComponent } from './components/dialogs/status-dialog/status-dialog.component'
+import{MatSnackBarModule} from '@angular/material/snack-bar'
+import{MatDialogModule} from '@angular/material/dialog';
+import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fakultet-dialog.component'
+
 
 @NgModule({
   declarations: [
@@ -30,7 +35,9 @@ import{MatToolbarModule} from '@angular/material/toolbar'
     AuthorComponent,
     FakultetComponent,
     StudentComponent,
-    DepartmanComponent
+    DepartmanComponent,
+    StatusDialogComponent,
+    FakultetDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +51,9 @@ import{MatToolbarModule} from '@angular/material/toolbar'
     MatExpansionModule,
     MatTableModule,
     HttpClientModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
