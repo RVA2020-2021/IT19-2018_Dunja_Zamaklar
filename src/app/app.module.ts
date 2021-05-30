@@ -17,6 +17,9 @@ import { AuthorComponent } from './components/core/author/author.component';
 import { FakultetComponent } from './components/fakultet/fakultet.component';
 import { StudentComponent } from './components/student/student.component';
 import { DepartmanComponent } from './components/departman/departman.component';
+import { MatTableModule} from '@angular/material/table'
+import {HttpClientModule} from '@angular/common/http'
+import{MatToolbarModule} from '@angular/material/toolbar'
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { DepartmanComponent } from './components/departman/departman.component';
     MatSidenavModule,
     MatListModule,
     MatGridListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    HttpClientModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
