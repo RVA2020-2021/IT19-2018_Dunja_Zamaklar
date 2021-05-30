@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import {Fakultet} from 'src/app/models/fakultet'
+import { Fakultet } from 'src/app/models/fakultet';
 import { FakultetService } from 'src/app/services/fakultet.service';
 
 @Component({
@@ -11,16 +11,13 @@ import { FakultetService } from 'src/app/services/fakultet.service';
 })
 export class FakultetComponent implements OnInit, OnDestroy {
 
-  displayedColumns: ['Id','Naziv','Sediste','Actions'];
+  displayedColumns= ['Id','Naziv','Sediste','Actions'];
   dataSource: MatTableDataSource<Fakultet>;
-  subscription: Subscription
+  subscription: Subscription;
 
   constructor(private fakultetService: FakultetService) { }
 
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
   ngOnInit(): void {
     this.loadData();
@@ -39,6 +36,9 @@ export class FakultetComponent implements OnInit, OnDestroy {
 
     }
 
+  }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
