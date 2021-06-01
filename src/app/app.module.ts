@@ -24,6 +24,9 @@ import { StatusDialogComponent } from './components/dialogs/status-dialog/status
 import{MatSnackBarModule} from '@angular/material/snack-bar'
 import{MatDialogModule} from '@angular/material/dialog';
 import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fakultet-dialog.component'
+import {FormsModule} from '@angular/forms'
+import {MatFormFieldModule} from '@angular/material/form-field'
+
 
 
 @NgModule({
@@ -53,7 +56,10 @@ import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fa
     HttpClientModule,
     MatToolbarModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    MatFormFieldModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

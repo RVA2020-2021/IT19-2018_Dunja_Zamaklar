@@ -41,7 +41,7 @@ export class StatusDialogComponent implements OnInit {
 
   }
 
-  public updateData(){
+  public updateStatus(){
     this.service.updateStatus(this.data).subscribe(()=>
     {
       this.snackBar.open('Uspesno modifikovan status'+this.data.naziv, 'OK', {
@@ -79,5 +79,4 @@ export class StatusDialogComponent implements OnInit {
       duration: 1000
     })
   }
-
 }

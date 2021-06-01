@@ -18,6 +18,7 @@ export class StatusService {
 
     public addStatus(status: Status): Observable<any>
     {
+      status.id=0;
       return this.httpClient.post(`${Status_URL}`,status)
     }
 
