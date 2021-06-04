@@ -13,17 +13,19 @@ export class FakultetService {
 
   public getAllFakultet(): Observable<any>
   {
+
     return this.httpClient.get(`${Fakultet_URL}`)
   }
 
   public addFakultet(fakultet: Fakultet):Observable<any>
   {
+    fakultet.id=0;
     return this.httpClient.post(`${Fakultet_URL}`,fakultet)
   }
 
   public updateFakultet(fakultet: Fakultet):Observable<any>
   {
-    return this.httpClient.post(`${Fakultet_URL}`,fakultet)
+    return this.httpClient.put(`${Fakultet_URL}`,fakultet)
   }
 
   public deleteFakultet(id: number):Observable<any>

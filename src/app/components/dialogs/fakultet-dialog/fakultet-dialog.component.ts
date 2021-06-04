@@ -12,16 +12,74 @@ import { FakultetService } from 'src/app/services/fakultet.service';
 })
 export class FakultetDialogComponent implements OnInit {
 
+  public flag: number;
   constructor(
-    public snakBar: MatSnackBar,
+    public snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<FakultetDialogComponent>,
     @Inject (MAT_DIALOG_DATA) public data: Fakultet,
-    public servise: FakultetService
+    public service: FakultetService
   ) { }
 
   ngOnInit(): void {
   }
 
+
+  public addFakultet(): void
+  {
+    this.service.addFakultet(this.data).subscribe(()=>
+    {
+      this.snackBar.open('Uspesno dodat fakultet'+this.data.naziv, 'OK', {
+        duration: 2500
+      })
+    }),
+    (error: Error) =>
+    {
+      console.log(error.name+' '+error.message);
+      this.snackBar.open('Doslo je do greske prilikom dodavanja novog fakulteta', 'OK', {
+        duration: 2500
+      })
+    }
+
+  }
+
+  public updateFakultet(){
+    this.service.updateFakultet(this.data).subscribe(()=>
+    {
+      this.snackBar.open('Uspesno modifikovan fakultet'+this.data.naziv, 'OK', {
+        duration: 2500})
+    }),
+    (error: Error) =>
+    {
+      console.log(error.name+' '+error.message);
+      this.snackBar.open('Doslo je do greske prilikom modifikovanja fakulteta', 'OK', {
+        duration: 2500
+      })
+    }
+  }
+
+  public deleteFakultet()
+  {
+    this.service.deleteFakultet(this.data.id).subscribe(()=>
+    {
+      this.snackBar.open('Uspesno izbrisan fakultet'+this.data.naziv, 'OK', {
+        duration: 2500})
+    }),
+    (error: Error) =>
+    {
+      console.log(error.name+' '+error.message);
+      this.snackBar.open('Doslo je do greske prilikom brisanja fakultet', 'OK', {
+        duration: 2500
+      })
+    }
+  }
+
+  public cancle(): void
+  {
+    this.dialogRef.close();
+    this.snackBar.open('Odustali ste.', 'Zatvori', {
+      duration: 1000
+    })
+  }
 
 
 }

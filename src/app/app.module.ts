@@ -26,7 +26,11 @@ import{MatDialogModule} from '@angular/material/dialog';
 import { FakultetDialogComponent } from './components/dialogs/fakultet-dialog/fakultet-dialog.component'
 import {FormsModule} from '@angular/forms'
 import {MatFormFieldModule} from '@angular/material/form-field'
-
+import {MatInputModule} from '@angular/material/input';
+import { StudentDialogComponent } from './components/dialogs/student-dialog/student-dialog.component';
+import { DepartmanDialogComponent } from './components/dialogs/departman-dialog/departman-dialog.component'
+import { MatOption, MatOptionModule } from '@angular/material/core';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -40,7 +44,9 @@ import {MatFormFieldModule} from '@angular/material/form-field'
     StudentComponent,
     DepartmanComponent,
     StatusDialogComponent,
-    FakultetDialogComponent
+    FakultetDialogComponent,
+    StudentDialogComponent,
+    DepartmanDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +65,9 @@ import {MatFormFieldModule} from '@angular/material/form-field'
     MatDialogModule,
     FormsModule,
     MatFormFieldModule,
-
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

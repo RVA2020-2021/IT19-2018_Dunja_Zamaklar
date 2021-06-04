@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Fakultet } from 'src/app/models/fakultet';
 import { FakultetService } from 'src/app/services/fakultet.service';
+import { FakultetDialogComponent } from '../dialogs/fakultet-dialog/fakultet-dialog.component';
 
 @Component({
   selector: 'app-fakultet',
@@ -15,7 +17,9 @@ export class FakultetComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Fakultet>;
   subscription: Subscription;
 
-  constructor(private fakultetService: FakultetService) { }
+
+  constructor(private fakultetService: FakultetService,
+    private diaglog: MatDialog) { }
 
 
 
@@ -41,4 +45,19 @@ export class FakultetComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  public openDialog(flag: number,id?: number,naziv?: string,sediste?: string) : void
+  {
+    const dialogRef= this.diaglog.open(FakultetDialogComponent,{data: {id,naziv,sediste}});
+
+    dialogRef.componentInstance.flag=flag;
+    dialogRef.afterClosed().subscribe(res=> {
+
+        this.loadData();
+
+    })
+  }
+
+
+
 }
