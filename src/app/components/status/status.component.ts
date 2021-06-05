@@ -1,5 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import {Status} from 'src/app/models/status'
@@ -13,10 +15,12 @@ import { StatusDialogComponent } from '../dialogs/status-dialog/status-dialog.co
 })
 export class StatusComponent implements OnInit, OnDestroy {
 
-  displayedColumns= ['Id','Naziv','Oznaka','Actions'];
-  dataSource: MatTableDataSource<Status>
-  subsciption: Subscription
+  displayedColumns= ['id','naziv','oznaka','actions'];
+  dataSource: MatTableDataSource<Status>;
+  subsciption: Subscription;
 
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   constructor(private statusService: StatusService,
       private diaglog: MatDialog) { }
 
@@ -32,6 +36,8 @@ export class StatusComponent implements OnInit, OnDestroy {
       this.subsciption=this.statusService.getAllStatus().subscribe(
         data => {
           this.dataSource=new MatTableDataSource(data);
+          this.dataSource.sort=this.sort;
+          this.dataSource.paginator=this.paginator;
         }
       ),
       (error: Error) =>{
@@ -52,5 +58,10 @@ export class StatusComponent implements OnInit, OnDestroy {
     })
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLocaleLowerCase();
+    this.dataSource.filter = filterValue;
+  }
 
 }
