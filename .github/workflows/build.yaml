@@ -34,5 +34,5 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=RVA2020-2021_IT19-2018_Dunja_Zamaklar -Dsonar.projectName='IT-19-2018-Zamaklar-Dunja' -DskipTests
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=RVA2020-2021_IT19-2018_Dunja_Zamaklar -Dsonar.projectName='IT-19-2018-Zamaklar--Dunja' -DskipTests
         working-directory: Starter-project
